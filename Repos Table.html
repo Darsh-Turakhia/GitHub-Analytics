@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Issues Table</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="Icon.jpg" type="image/x-icon" />
+	<style>
+    @import url('https://fonts.googleapis.com/css?family=Oswald:500');
+.bg{
+  background-color: #90e0ef;
+}
+.thx{
+  position: fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom: 15px;
+}
+nav{
+  width: 100%;
+  position: fixed;
+  top:50px;
+  text-align:center;
+  
+}
+nav a{
+  font-family: 'Oswald', sans-serif;
+  font-weight:500;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:#16151b;
+  margin:0 15px;
+  font-size:16px;
+  letter-spacing:1px;
+  position:relative;
+  display:inline-block;
+}
+nav a:before{
+  content:'';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background:#16151b;
+  top:47%;
+  animation:out 0.2s cubic-bezier(1, 0, 0.58, 0.97) 1 both;
+}
+nav a:hover:before{
+  animation:in 0.2s cubic-bezier(1, 0, 0.58, 0.97) 1 both;
+
+}
+@keyframes in{
+  0%{
+    width: 0;
+    left:0;
+    right:auto;
+  }
+  100%{
+    left:0;
+    right:auto;
+    width: 100%;
+  }
+}
+@keyframes out{
+  0%{
+    width:100%;
+    left: auto;
+    right: 0;
+  }
+  100%{
+    width: 0;
+    left: auto;
+    right: 0;
+  }
+}
+@keyframes show{
+  0%{
+    opacity:0;
+    transform:translateY(-10px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@for $i from 1 through 5 {
+  nav a:nth-child(#{$i}){
+    animation:show .2s #{$i*0.1+1}s ease 1 both;
+  }
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:500px;
+ }
+ p.impact{
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: 5em;
+  color: rgb(0  ,0,0);
+ }
+
+
+.buttonClass {
+  font-size:15px;
+  font-family:Arial;
+  width:140px;
+  height:50px;
+  border-width:1px;
+  color:black;
+  border-color:#84bbf3;
+  font-weight:bold;
+  border-top-left-radius:6px;
+  border-top-right-radius:6px;
+  border-bottom-left-radius:6px;
+  border-bottom-right-radius:6px;
+  box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+  text-shadow:inset 0px 1px 0px #528ecc;
+  background:linear-gradient(#79bbff, #378de5);
+}
+
+.buttonClass:hover {
+  background: linear-gradient(#378de5, #79bbff);
+}
+
+</style>
+</head>
+<body class="bg">
+<nav>
+  <a href="../Github Analytics/home.html">Home</a>
+  <a href="../Github Analytics/PRs Table.html">PRs</a>
+  <a href="../Github Analytics/Issues Table.html">Issues</a>
+  <a href="../Github Analytics/Year Table.php">Year Wise</a>
+</nav>
+<br><br><br><br><br><br>
+<center>
+<form method="POST">
+    <select name="lang" id="dropdown" class="buttonClass">
+      <option value="%" disabled selected>Language</option>
+      <option value="%">ALL</option>
+      <option value="1">1C Enterprise</option>
+      <option value="2">ABAP</option>
+      <option value="3">ActionScript</option>
+      <option value="4">Ada</option>
+      <option value="5">Agda</option>
+      <option value="6">AGS Script</option>
+      <option value="7">AIDL</option>
+      <option value="8">AL</option>
+      <option value="9">Alloy</option>
+      <option value="10">AMPL</option>
+      <option value="11">AngelScript</option>
+      <option value="12">ANTLR</option>
+      <option value="13">ApacheConf</option>
+      <option value="14">Apex</option>
+      <option value="15">API Blueprint</option>
+      <option value="16">APL</option>
+      <option value="17">AppleScript</option>
+      <option value="18">Arc</option>
+      <option value="19">Arduino</option>
+      <option value="20">ASL</option>
+      <option value="21">ASP</option>
+      <option value="22">ASP .NET</option>
+      <option value="23">AspectJ</option>
+      <option value="24">Assembly</option>
+      <option value="25">Astro</option>
+      <option value="26">Asymptote</option>
+      <option value="27">ATS</option>
+      <option value="28">Augeas</option>
+      <option value="29">AutoHotkey</option>
+      <option value="30">AutoIt</option>
+      <option value="31">Awk</option>
+      <option value="32">Ballerina</option>
+      <option value="33">BASIC</option>
+      <option value="34">Batchfile</option>
+      <option value="35">Beef</option>
+      <option value="36">Befunge</option>
+      <option value="37">Bicep</option>
+      <option value="38">Bison</option>
+      <option value="39">BitBake</option>
+      <option value="40">Blade</option>
+      <option value="41">BlitzBasic</option>
+      <option value="42">BlitzMax</option>
+      <option value="43">Bluespec</option>
+      <option value="44">Boo</option>
+      <option value="45">Boogie</option>
+      <option value="46">Brainfuck</option>
+      <option value="47">Brightscript</option>
+      <option value="48">Bro</option>
+      <option value="49">C</option>
+      <option value="50">C#</option>
+      <option value="51">C++</option>
+      <option value="52">Cap'n Proto</option>
+      <option value="53">CartoCSS</option>
+      <option value="54">Ceylon</option>
+      <option value="55">Chapel</option>
+      <option value="56">Charity</option>
+      <option value="57">ChucK</option>
+      <option value="58">Cirru</option>
+      <option value="59">Clarion</option>
+      <option value="60">Classic ASP</option>
+      <option value="61">Clean</option>
+      <option value="62">Click</option>
+      <option value="63">CLIPS</option>
+      <option value="64">Clojure</option>
+      <option value="65">Closure Templates</option>
+      <option value="66">CMake</option>
+      <option value="67">COBOL</option>
+      <option value="68">CodeQL</option>
+      <option value="69">CoffeeScript</option>
+      <option value="70">ColdFusion</option>
+      <option value="71">Common Lisp</option>
+      <option value="72">Common Workflow Language</option>
+      <option value="73">Component Pascal</option>
+      <option value="74">Cool</option>
+      <option value="75">Coq</option>
+      <option value="76">Crystal</option>
+      <option value="77">CSON</option>
+      <option value="78">Csound</option>
+      <option value="79">Csound Document</option>
+      <option value="80">Csound Score</option>
+      <option value="81">CSS</option>
+      <option value="82">Cucumber</option>
+      <option value="83">Cuda</option>
+      <option value="84">CUE</option>
+      <option value="85">CWeb</option>
+      <option value="86">Cycript</option>
+      <option value="87">Cython</option>
+      <option value="88">D</option>
+      <option value="89">Dart</option>
+      <option value="90">DataWeave</option>
+      <option value="91">DCPU-16 ASM</option>
+      <option value="92">Delphi</option>
+      <option value="93">Dhall</option>
+      <option value="94">Diff</option>
+      <option value="95">DIGITAL Command Language</option>
+      <option value="96">DM</option>
+      <option value="97">Dockerfile</option>
+      <option value="98">Dogescript</option>
+      <option value="99">DOT</option>
+      <option value="100">DTrace</option>
+      <option value="101">Dylan</option>
+      <option value="102">E</option>
+      <option value="103">Eagle</option>
+      <option value="104">Earthly</option>
+      <option value="105">eC</option>
+      <option value="106">Ecl</option>
+      <option value="107">ECL</option>
+      <option value="108">Eiffel</option>
+      <option value="109">EJS</option>
+      <option value="110">Elixir</option>
+      <option value="111">Elm</option>
+      <option value="112">Emacs Lisp</option>
+      <option value="113">EmberScript</option>
+      <option value="114">EQ</option>
+      <option value="115">Erlang</option>
+      <option value="116">F#</option>
+      <option value="117">F*</option>
+      <option value="118">Factor</option>
+      <option value="119">Fancy</option>
+      <option value="120">Fantom</option>
+      <option value="121">Faust</option>
+      <option value="122">Fennel</option>
+      <option value="123">Filebench WML</option>
+      <option value="124">Fluent</option>
+      <option value="125">FLUX</option>
+      <option value="126">Forth</option>
+      <option value="127">FORTRAN</option>
+      <option value="128">Fortran</option>
+      <option value="129">FreeBasic</option>
+      <option value="130">FreeMarker</option>
+      <option value="131">Frege</option>
+      <option value="132">Futhark</option>
+      <option value="133">Game Maker Language</option>
+      <option value="134">GAML</option>
+      <option value="135">GAMS</option>
+      <option value="136">GAP</option>
+      <option value="137">GCC Machine Description</option>
+      <option value="138">G-code</option>
+      <option value="139">GDB</option>
+      <option value="140">GDScript</option>
+      <option value="141">Genie</option>
+      <option value="142">Genshi</option>
+      <option value="143">Gettext Catalog</option>
+      <option value="144">Gherkin</option>
+      <option value="145">GLSL</option>
+      <option value="146">Glyph</option>
+      <option value="147">Gnuplot</option>
+      <option value="148">Go</option>
+      <option value="149">Golo</option>
+      <option value="150">Gosu</option>
+      <option value="151">Grace</option>
+      <option value="152">Grammatical Framework</option>
+      <option value="153">Graphviz (DOT)</option>
+      <option value="154">Groff</option>
+      <option value="155">Groovy</option>
+      <option value="156">Hack</option>
+      <option value="157">Haml</option>
+      <option value="158">Handlebars</option>
+      <option value="159">Harbour</option>
+      <option value="160">Haskell</option>
+      <option value="161">Haxe</option>
+      <option value="162">HCL</option>
+      <option value="163">HiveQL</option>
+      <option value="164">HLSL</option>
+      <option value="165">HolyC</option>
+      <option value="166">HTML</option>
+      <option value="167">Hy</option>
+      <option value="168">HyPhy</option>
+      <option value="169">IDL</option>
+      <option value="170">Idris</option>
+      <option value="171">IGOR Pro</option>
+      <option value="172">ImageJ Macro</option>
+      <option value="173">Inform 7</option>
+      <option value="174">INI</option>
+      <option value="175">Inno Setup</option>
+      <option value="176">Io</option>
+      <option value="177">Ioke</option>
+      <option value="178">Isabelle</option>
+      <option value="179">J</option>
+      <option value="180">Jasmin</option>
+      <option value="181">Java</option>
+      <option value="182">JavaScript</option>
+      <option value="183">JFlex</option>
+      <option value="184">Jinja</option>
+      <option value="185">Jolie</option>
+      <option value="186">jq</option>
+      <option value="187">JSON</option>
+      <option value="188">JSONiq</option>
+      <option value="189">Jsonnet</option>
+      <option value="190">Julia</option>
+      <option value="191">Jupyter Notebook</option>
+      <option value="192">Kaitai Struct</option>
+      <option value="193">KakouneScript</option>
+      <option value="194">KiCad</option>
+      <option value="195">KiCad Layout</option>
+      <option value="196">KiCad Schematic</option>
+      <option value="197">Kit</option>
+      <option value="198">Kotlin</option>
+      <option value="199">KRL</option>
+      <option value="200">LabVIEW</option>
+      <option value="201">Lasso</option>
+      <option value="202">Latte</option>
+      <option value="203">Lean</option>
+      <option value="204">Less</option>
+      <option value="205">Lex</option>
+      <option value="206">LFE</option>
+      <option value="207">LilyPond</option>
+      <option value="208">Limbo</option>
+      <option value="209">Liquid</option>
+      <option value="210">LiveScript</option>
+      <option value="211">LLVM</option>
+      <option value="212">Logos</option>
+      <option value="213">Logtalk</option>
+      <option value="214">LOLCODE</option>
+      <option value="215">LookML</option>
+      <option value="216">LoomScript</option>
+      <option value="217">LSL</option>
+      <option value="218">Lua</option>
+      <option value="219">M</option>
+      <option value="220">M4</option>
+      <option value="221">Macaulay2</option>
+      <option value="222">Makefile</option>
+      <option value="223">Mako</option>
+      <option value="224">Markdown</option>
+      <option value="225">Marko</option>
+      <option value="226">Mask</option>
+      <option value="227">Mathematica</option>
+      <option value="228">Matlab</option>
+      <option value="229">MATLAB</option>
+      <option value="230">Max</option>
+      <option value="231">MAXScript</option>
+      <option value="232">Mercury</option>
+      <option value="233">Meson</option>
+      <option value="234">Metal</option>
+      <option value="235">Mirah</option>
+      <option value="236">mIRC Script</option>
+      <option value="237">MLIR</option>
+      <option value="238">Modelica</option>
+      <option value="239">Modula-2</option>
+      <option value="240">Modula-3</option>
+      <option value="241">Module Management System</option>
+      <option value="242">Monkey</option>
+      <option value="243">Moocode</option>
+      <option value="244">MoonScript</option>
+      <option value="245">Motoko</option>
+      <option value="246">MQL4</option>
+      <option value="247">MQL5</option>
+      <option value="248">MTML</option>
+      <option value="249">mupad</option>
+      <option value="250">Mustache</option>
+      <option value="251">Myghty</option>
+      <option value="252">NASL</option>
+      <option value="253">NCL</option>
+      <option value="254">Nearley</option>
+      <option value="255">Nemerle</option>
+      <option value="256">nesC</option>
+      <option value="257">NetLinx</option>
+      <option value="258">NetLinx+ERB</option>
+      <option value="259">NetLogo</option>
+      <option value="260">NewLisp</option>
+      <option value="261">Nextflow</option>
+      <option value="262">Nginx</option>
+      <option value="263">Nim</option>
+      <option value="264">Nimrod</option>
+      <option value="265">Nit</option>
+      <option value="266">Nix</option>
+      <option value="267">NSIS</option>
+      <option value="268">Nu</option>
+      <option value="269">Nunjucks</option>
+      <option value="270">Objective-C</option>
+      <option value="271">Objective-C++</option>
+      <option value="272">Objective-J</option>
+      <option value="273">ObjectScript</option>
+      <option value="274">OCaml</option>
+      <option value="275">Odin</option>
+      <option value="276">Omgrofl</option>
+      <option value="277">ooc</option>
+      <option value="278">Opa</option>
+      <option value="279">Opal</option>
+      <option value="280">Open Policy Agent</option>
+      <option value="281">OpenEdge ABL</option>
+      <option value="282">OpenQASM</option>
+      <option value="283">OpenSCAD</option>
+      <option value="284">Org</option>
+      <option value="285">Ox</option>
+      <option value="286">Oxygene</option>
+      <option value="287">Oz</option>
+      <option value="288">P4</option>
+      <option value="289">Pan</option>
+      <option value="290">Papyrus</option>
+      <option value="291">Parrot</option>
+      <option value="292">Pascal</option>
+      <option value="293">PAWN</option>
+      <option value="294">Pawn</option>
+      <option value="295">PEG.js</option>
+      <option value="296">Pep8</option>
+      <option value="297">Perl</option>
+      <option value="298">Perl 6</option>
+      <option value="299">Perl6</option>
+      <option value="300">PHP</option>
+      <option value="301">PicoLisp</option>
+      <option value="302">PigLatin</option>
+      <option value="303">Pike</option>
+      <option value="304">PLpgSQL</option>
+      <option value="305">PLSQL</option>
+      <option value="306">PogoScript</option>
+      <option value="307">Pony</option>
+      <option value="308">PostScript</option>
+      <option value="309">POV-Ray SDL</option>
+      <option value="310">PowerBuilder</option>
+      <option value="311">PowerShell</option>
+      <option value="312">Processing</option>
+      <option value="313">Prolog</option>
+      <option value="314">Promela</option>
+      <option value="315">Propeller Spin</option>
+      <option value="316">Protocol Buffer</option>
+      <option value="317">Pug</option>
+      <option value="318">Puppet</option>
+      <option value="319">Pure Data</option>
+      <option value="320">PureBasic</option>
+      <option value="321">PureScript</option>
+      <option value="322">Python</option>
+      <option value="323">q</option>
+      <option value="324">Q#</option>
+      <option value="325">QMake</option>
+      <option value="326">QML</option>
+      <option value="327">Qt Script</option>
+      <option value="328">R</option>
+      <option value="329">Racket</option>
+      <option value="330">Ragel</option>
+      <option value="331">Ragel in Ruby Host</option>
+      <option value="332">Raku</option>
+      <option value="333">RAML</option>
+      <option value="334">Rascal</option>
+      <option value="335">REALbasic</option>
+      <option value="336">Reason</option>
+      <option value="337">Rebol</option>
+      <option value="338">Red</option>
+      <option value="339">Redcode</option>
+      <option value="340">RenderScript</option>
+      <option value="341">Ren'Py</option>
+      <option value="342">ReScript</option>
+      <option value="343">REXX</option>
+      <option value="344">Rich Text Format</option>
+      <option value="345">Ring</option>
+      <option value="346">Riot</option>
+      <option value="347">RobotFramework</option>
+      <option value="348">Roff</option>
+      <option value="349">Rouge</option>
+      <option value="350">RPC</option>
+      <option value="351">Ruby</option>
+      <option value="352">RUNOFF</option>
+      <option value="353">Rust</option>
+      <option value="354">Sage</option>
+      <option value="355">SaltStack</option>
+      <option value="356">SAS</option>
+      <option value="357">Sass</option>
+      <option value="358">Scala</option>
+      <option value="359">Scaml</option>
+      <option value="360">Scheme</option>
+      <option value="361">Scilab</option>
+      <option value="362">SCSS</option>
+      <option value="363">sed</option>
+      <option value="364">Self</option>
+      <option value="365">ShaderLab</option>
+      <option value="366">Shell</option>
+      <option value="367">ShellSession</option>
+      <option value="368">Shen</option>
+      <option value="369">Sieve</option>
+      <option value="370">Singularity</option>
+      <option value="371">Slash</option>
+      <option value="372">Slice</option>
+      <option value="373">Slim</option>
+      <option value="374">Smali</option>
+      <option value="375">Smalltalk</option>
+      <option value="376">Smarty</option>
+      <option value="377">SmPL</option>
+      <option value="378">SMT</option>
+      <option value="379">Solidity</option>
+      <option value="380">SourcePawn</option>
+      <option value="381">SQF</option>
+      <option value="382">SQL</option>
+      <option value="383">SQLPL</option>
+      <option value="384">Squirrel</option>
+      <option value="385">SRecode Template</option>
+      <option value="386">Stan</option>
+      <option value="387">Standard ML</option>
+      <option value="388">Starlark</option>
+      <option value="389">Stata</option>
+      <option value="390">StringTemplate</option>
+      <option value="391">Stylus</option>
+      <option value="392">SuperCollider</option>
+      <option value="393">Svelte</option>
+      <option value="394">Swift</option>
+      <option value="395">SWIG</option>
+      <option value="396">SystemVerilog</option>
+      <option value="397">Tcl</option>
+      <option value="398">Tea</option>
+      <option value="399">Terra</option>
+      <option value="400">TeX</option>
+      <option value="401">Thrift</option>
+      <option value="402">TI Program</option>
+      <option value="403">TLA</option>
+      <option value="404">TSQL</option>
+      <option value="405">Turing</option>
+      <option value="406">Twig</option>
+      <option value="407">TXL</option>
+      <option value="408">TypeScript</option>
+      <option value="409">Uno</option>
+      <option value="410">UnrealScript</option>
+      <option value="411">UrWeb</option>
+      <option value="412">V</option>
+      <option value="413">Vala</option>
+      <option value="414">VBA</option>
+      <option value="415">VBScript</option>
+      <option value="416">VCL</option>
+      <option value="417">Verilog</option>
+      <option value="418">VHDL</option>
+      <option value="419">Vim script</option>
+      <option value="420">Vim Snippet</option>
+      <option value="421">VimL</option>
+      <option value="422">Visual Basic</option>
+      <option value="423">Visual Basic .NET</option>
+      <option value="424">Volt</option>
+      <option value="425">Vue</option>
+      <option value="426">wdl</option>
+      <option value="427">Web Ontology Language</option>
+      <option value="428">WebAssembly</option>
+      <option value="429">WebIDL</option>
+      <option value="430">wisp</option>
+      <option value="431">Wollok</option>
+      <option value="432">X10</option>
+      <option value="433">xBase</option>
+      <option value="434">XC</option>
+      <option value="435">XML</option>
+      <option value="436">Xojo</option>
+      <option value="437">Xonsh</option>
+      <option value="438">XPages</option>
+      <option value="439">XProc</option>
+      <option value="440">XQuery</option>
+      <option value="441">XS</option>
+      <option value="442">XSLT</option>
+      <option value="443">Xtend</option>
+      <option value="444">Yacc</option>
+      <option value="445">YAML</option>
+      <option value="446">YARA</option>
+      <option value="447">YASnippet</option>
+      <option value="448">ZAP</option>
+      <option value="449">Zeek</option>
+      <option value="450">ZenScript</option>
+      <option value="451">Zephir</option>
+      <option value="452">Zig</option>
+      <option value="453">Zimpl</option>
+    </select>
+    <input type="submit" formaction="Repos Table.php" value="GO" class="buttonClass">
+</form>
+</center>
+</body>
+</html>
